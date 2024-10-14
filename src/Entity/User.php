@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\InheritanceType('JOINED')]
@@ -20,7 +21,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 320)]
+    #[Assert\Email(message: 'Veuillez entrer un email valide')]
+    #[Assert\Length(
+        max: 320,
+        maxMessage: 'Veuillez renseigner un email un peu court'
+    )]
+    #[Assert\NotBlank(message: 'Le champs email est obligatoire')]
     private ?string $email = null;
 
     /**
@@ -33,12 +40,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
+        message: 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.'
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(
+        message: 'Le prénom ne peut pas être vide'
+    )]
+    #[Assert\Length(
+        min: 2,
+        max: 100,
+        minMessage: 'Le prénom est trop court',
+        maxMessage: 'Le prénom est trop long'
+    )]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(
+        message: 'Le nom de famille ne peut pas être vide'
+    )]
+    #[Assert\Length(
+        min: 2,
+        max: 100,
+        minMessage: 'Le nom de famille est trop court',
+        maxMessage: 'Le nom de famille est trop long'
+    )]
     private ?string $lastname = null;
 
     public function getId(): ?int

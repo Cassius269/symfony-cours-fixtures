@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\IngredientRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
 class Ingredient
@@ -20,6 +21,11 @@ class Ingredient
     private ?int $id = null;
 
     #[ORM\Column(length: 70)]
+    #[Assert\NotBlank(message: 'Le nom doit être renseigné')]
+    #[Assert\Length(
+        max: 70,
+        maxMessage: 'Le nom de l\'ingrédient est trop long'
+    )]
     private ?string $name = null;
 
     /**

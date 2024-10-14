@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RecipeRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 class Recipe
@@ -20,9 +21,15 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: 'La description de la recette est obligatoire')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\NotBlank(message: 'La description de la recette est obligatoire')]
+    #[Assert\Length(
+        min: 50,
+        minMessage: 'La description est trop courte'
+    )]
     private ?string $description = null;
 
     /**
