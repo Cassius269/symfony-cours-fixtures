@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire
+{% endblock %}
+
+{% block body %}
+	<h1>Page d'inscription</h1>
+	{# Afficher le formulaire#}
+	{{ form_start(form)}}
+	{{form_row(form.firstname)}}
+	{{form_row(form.lastname)}}
+	{{form_row(form.email)}}
+	{{form_row(form.password)}}
+	<button>submit</button>
+	{{ form_end(form)}}
+	{# {{ form(form)}} #}
+{% endblock %}
