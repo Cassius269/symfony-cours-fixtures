@@ -1,0 +1,8 @@
+ // Regroupement du code SCSS commun aux messages de succès et d'erreurs
+ %commonCSS {
+    padding: 1rem;
+    color: $secondaryColor;// couleur blanche
+    position: relative;
+    top: 1rem;
+    text-align: center;
+}

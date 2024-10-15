@@ -1,0 +1,13 @@
+@import './../utils/placeholders.scss'; // Importation des placeholders et dedans le CSS commun des messages d'erreur
+
+ul:has(.flash-error ){
+    background: #ff4b2b;
+    @extend %commonCSS;
+
+}
+
+
+ul:has(.flash-success){
+    background: #eaa032;
+    @extend %commonCSS;
+}

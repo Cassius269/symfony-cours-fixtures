@@ -1,0 +1,26 @@
+<header>
+	<ul>
+		<li>
+			<a href="{{ path('home') }}">Accueil</a>
+		</li>
+		<li>
+			<a href="{{ path('connexion')}} ">Se connecter</a>
+		</li>
+		{% if app.user %}
+			<li>
+				<a href="">Gérer les récettes</a>
+			</li>
+			<li>
+				<a href="">Se déconnecter</a>
+			</li>
+		{% endif %}
+	</ul>
+</header>
+{# Affichage des messages flash #}
+<ul class="listMessage">
+	{% for typeOfMessage,message in app.flashes(["success","error"]) %}
+		{% for flashMessage in message %}
+			<li class="flash-{{typeOfMessage}}">{{flashMessage}}</li>
+		{% endfor %}
+	{% endfor %}
+</ul>

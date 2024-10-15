@@ -1,0 +1,10 @@
+// Importation des partiels
+@import './base/normalize';
+@import './base/globalCustomStyle';
+@import './utils/variables';
+//@import './utils/mixins';
+@import './layouts/header';
+@import './layouts/footer';
+@import './components/messageFlash';
+@import './components/buttons';
+@import './components/input';
