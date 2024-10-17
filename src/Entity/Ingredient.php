@@ -34,6 +34,9 @@ class Ingredient
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'ingredients')]
     private Collection $recipes;
 
+    #[ORM\ManyToOne(inversedBy: 'ingredients')]
+    private ?author $author = null;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
@@ -79,6 +82,18 @@ class Ingredient
         if ($this->recipes->removeElement($recipe)) {
             $recipe->removeIngredient($this);
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?author $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }
